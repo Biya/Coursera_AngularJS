@@ -7,9 +7,10 @@ angular.module('LunchCheck',[])
 LunchCheckCtrlFunction.$inject = ['$scope'];
 function LunchCheckCtrlFunction($scope){
     $scope.myPlaceholder = 'list comma separated dishes you usually have for lunch';
-
+    $scope.dishesList = "";
 // function return the right message to show
-    function showMessage(aList){
+    $scope.showMessage = function(aList){
+      console.log('**** checkLength function ****')
       var dishesArray =[];
       var theMessage = "";
       //first convert list to array
@@ -24,19 +25,20 @@ function LunchCheckCtrlFunction($scope){
           theMessage = "Too much!";
       }
 
-      return theMessage;
+      $scope.message=theMessage;
+
+      // Uncomment to see what's happening
+      // console.log('Liste: ',$scope.dishesList);
+      // console.log('longueur:', listToArray($scope.dishesList).length);
 
     };
-
 
 // function to convert string to Array
     function listToArray(aList){
+
         return aList.split(",");
     };
-     //console.log(listToArray("dede,frfrf,rrf,thyyhy"));
-    //  var testString = "de,dede,de,de,de,de,de";
-    //  console.log('longueur:', listToArray(testString).length);
-    //  console.log(showMessage(testString));
+
 };
 
 
