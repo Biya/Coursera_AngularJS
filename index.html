@@ -8,15 +8,28 @@
     <title>Name Calculator</title>
   </head>
   <body ng-app="NameCalculator">
-    <h1>Name Calculator</h1>
+    <h1>Creer Tata</h1>
     <div ng-controller="NameCaculatorController">
-      <div>
+      <!-- <div>
         Your name:
         <input type="text"
           ng-model="name"
-          ng-keyup="displayNumeric();">
+          ng-keyup="displayNumeric();"
+          ng-blur = "test()">
       </div>
-      <div>Total Numeric value of person's name is: {{totalValue}}</div>
+      <div>Total Numeric value of person's name is: {{totalValue}}</div> -->
+      <input type="text" ng-model="nbreSemaine">
+      <button ng-click="genererTabIndice(nbreSemaine)">Valider</button>
+        <span ng-repeat="x in tabIndice track by $index"><br ng-show="x%7==0">
+          <select ng-change="sauver()" ng-model="affichage[$index]">
+            <option ng-repeat="jour in tabJours">{{jour}}</option>
+          </select>
+          <!-- <select ng-model="jour2">
+            <option ng-repeat="jour in tabJours">{{jour}}</option>
+          </select> -->
+        </span>
+
+      <!-- <button ng-click="sauver()">Sauvegarder</button> -->
     </div>
   </body>
 </html>

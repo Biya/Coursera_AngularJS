@@ -25,11 +25,11 @@ function LunchCheckCtrlFunction($scope){
           theMessage = "Too much!";
       }
 
-      $scope.message=theMessage;
+      $scope.message = theMessage;
 
       // Uncomment to see what's happening
-      // console.log('Liste: ',$scope.dishesList);
-      // console.log('longueur:', listToArray($scope.dishesList).length);
+    //   console.log('Liste: ',$scope.dishesList);
+    //   console.log('longueur:', listToArray($scope.dishesList).length);
 
     };
 
