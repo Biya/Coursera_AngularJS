@@ -1,24 +1,26 @@
-(function(){
+(function() {
 
   angular.module('ShoppingListCheckOff', [])
-    .controller('ToBuyController',ToBuyCtrlFunction)
-    .controller('AlreadyBoughtController',BoughtCtrlFunction)
+    .controller('ToBuyController',ToBuyController)
+    .controller('AlreadyBoughtController',AlreadyBoughtController)
     .service('ShoppingListCheckOffService', ShoppingListCheckOffService);
   
-  ToBuyCtrlFunction.$inject['ShoppingListCheckOffService'];
-  function ToBuyCtrlFunction(ShoppingListCheckOffService) {
+  ToBuyController.$inject['ShoppingListCheckOffService'];
+  function ToBuyController(ShoppingListCheckOffService) {
     var toBuyCtrl = this;
     
     // inialize the list to display
     toBuyCtrl.toBuyList = ShoppingListCheckOffService.getToBuyList();
    
-    toBuyCtrl.boughtButton = function () {
-    }
+    toBuyCtrl.boughtBtn = function (index) {
+      
+      ShoppingListCheckOffService.boughtBtnFunction(index);
+    };
 
   }
 
-  BoughtCtrlFunction.$inject['ShoppingListCheckOffService'];
-  function BoughtCtrlFunction(ShoppingListCheckOffService) {
+  AlreadyBoughtController.$inject['ShoppingListCheckOffService'];
+  function AlreadyBoughtController(ShoppingListCheckOffService) {
     var boughtCtrl = this;
 
     boughtCtrl.boughtList = ShoppingListCheckOffService.getBoughtList();
@@ -43,12 +45,34 @@
 
     }
     service.getBoughtList = function () {
-      console.log("Enter getBoughtList");
+      console.log("Enter getBoughtList()");
       return boughtList;
     }
-    service.boughtButton = function (toBuyList,boughtList) {
+    service.boughtBtnFunction = function (index) {
+
+      //First add the item in boughtList
+      addItem(toBuyList[index].name, toBuyList[index].quantity, boughtList);
+      //Then remove the item from the toBuyList
+      removeItem(index, toBuyList);
       
     }
+    // Function used to addItem in the boughList
+    function addItem(itemName,quantity,aList) {
+      var item = {
+        name: itemName,
+        quantity:quantity
+      }
+      aList.push(item);
+      console.log("List with added item", aList);
+    }
+
+    // Function used to remove from the toBuyList
+    function removeItem(index,aList) {
+      aList.splice(index, 1);
+      console.log("List with removed item", aList);
+
+    }
+
 
   }
   
