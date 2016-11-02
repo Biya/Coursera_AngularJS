@@ -18,7 +18,7 @@
       
       ShoppingListCheckOffService.boughtBtnFunction(index);
       toBuyCtrl.allBought = ShoppingListCheckOffService.allBought;
-      console.log("toBuyCtrl.allBought: ", toBuyCtrl.allBought);      
+      //console.log("toBuyCtrl.allBought: ", toBuyCtrl.allBought);      
       
     };
    
@@ -51,12 +51,12 @@
     service.nothingBought = true;
 
     service.getToBuyList = function () {
-      console.log("Enter getToBuyList()");
+      //console.log("Enter getToBuyList()");
       return toBuyList;
 
     }
     service.getBoughtList = function () {
-      console.log("Enter getBoughtList()");
+      //console.log("Enter getBoughtList()");
       return boughtList;
     }
     service.boughtBtnFunction = function (index) {
@@ -70,8 +70,8 @@
       };
       service.nothingBought = false;
 
-      console.log("service.allBought", service.allBought);
-      console.log("service.nothingBought", service.nothingBought);
+      // console.log("service.allBought", service.allBought);
+      // console.log("service.nothingBought", service.nothingBought);
 
     }
     // Function used to addItem in the boughList
@@ -90,10 +90,6 @@
       console.log("List with removed item", aList);
 
     }
-
-
-  }
+ }
   
-
-
 })();
