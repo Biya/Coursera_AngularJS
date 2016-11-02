@@ -1,11 +1,13 @@
-(function() {
+(function () {
+  
+  'use strict';
 
   angular.module('ShoppingListCheckOff', [])
     .controller('ToBuyController',ToBuyController)
     .controller('AlreadyBoughtController',AlreadyBoughtController)
     .service('ShoppingListCheckOffService', ShoppingListCheckOffService);
   
-  ToBuyController.$inject['ShoppingListCheckOffService'];
+  ToBuyController.$inject = ['ShoppingListCheckOffService'];
   function ToBuyController(ShoppingListCheckOffService) {
     var toBuyCtrl = this;
     
@@ -15,18 +17,24 @@
     toBuyCtrl.boughtBtn = function (index) {
       
       ShoppingListCheckOffService.boughtBtnFunction(index);
+      toBuyCtrl.allBought = ShoppingListCheckOffService.allBought;
+      console.log("toBuyCtrl.allBought: ", toBuyCtrl.allBought);      
+      
     };
-
+   
   }
 
-  AlreadyBoughtController.$inject['ShoppingListCheckOffService'];
+  AlreadyBoughtController.$inject = ['ShoppingListCheckOffService'];
   function AlreadyBoughtController(ShoppingListCheckOffService) {
     var boughtCtrl = this;
+    boughtCtrl.theService = ShoppingListCheckOffService;
 
     boughtCtrl.boughtList = ShoppingListCheckOffService.getBoughtList();
-  }
+    
+   }
 
   function ShoppingListCheckOffService() {
+
     var service = this;
 
     // Initialize the list of items to buy    
@@ -38,6 +46,9 @@
     
     // Initialize the list of already bought items
     var boughtList = [];
+
+    service.allBought = false;
+    service.nothingBought = true;
 
     service.getToBuyList = function () {
       console.log("Enter getToBuyList()");
@@ -54,7 +65,14 @@
       addItem(toBuyList[index].name, toBuyList[index].quantity, boughtList);
       //Then remove the item from the toBuyList
       removeItem(index, toBuyList);
-      
+      if (toBuyList.length == 0) {
+        service.allBought = true;
+      };
+      service.nothingBought = false;
+
+      console.log("service.allBought", service.allBought);
+      console.log("service.nothingBought", service.nothingBought);
+
     }
     // Function used to addItem in the boughList
     function addItem(itemName,quantity,aList) {
