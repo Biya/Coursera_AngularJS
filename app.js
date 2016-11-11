@@ -7,6 +7,8 @@ angular.module('NameCalculator', [])
   $scope.name = "";
   $scope.totalValue = 0;
   $scope.affichage=[];
+  // $scope.trameIncomplete = true;
+
 
   $scope.displayNumeric = function () {
     var totalNameValue = calculatNumericForString($scope.name);
@@ -16,9 +18,12 @@ angular.module('NameCalculator', [])
   $scope.sauver = function(){
     console.log("**** Entree dans sauver()");
     console.log("tableau affichage:",$scope.affichage );
+    console.log("nbre de semaines: ",$scope.nbreSemaine);
+
+
   };
 
-  
+
 
   function calculatNumericForString(string) {
     var totalStringValue = 0;
@@ -31,6 +36,8 @@ angular.module('NameCalculator', [])
 
   $scope.genererTabIndice = function(nbre) {
     $scope.affichage = [];
+    $scope.trameIncomplete = true;
+
     var bufferTab = [];
     for (var index = 0; index < nbre*7; index++) {
       bufferTab.push(index);
