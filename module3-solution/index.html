@@ -9,16 +9,16 @@
 <body ng-app="NarrowItDownApp">
    <div class="container" ng-controller="NarrowItDownController as nidCtrl">
     <h1>Narrow Down Your Chinese Menu Choice</h1>
-
-    <div class="form-group">
-      <input type="text" placeholder="search term" class="form-control" ng-model="nidCtrl.searchWord">
-    </div>
-    <div class="form-group narrow-button">
-      <button class="btn btn-primary" ng-click="nidCtrl.getFoundItems()">Narrow It Down For Me!</button>
-    </div>
-
+    <div class="row">
+      <div class="col-xs-2 form-group">
+        <input type="text" placeholder="search term" class="form-control" ng-model="nidCtrl.searchWord">
+      </div>
+      <div class="col-xs-2 form-group narrow-button">
+        <button class="btn btn-primary" ng-click="nidCtrl.getFoundItems()">Narrow It Down For Me!</button>
+      </div>
+   </div>
     <!-- found-items should be implemented as a component -->
-    <found-items found-items="...." on-remove="...."></found-items>
+    <found-items found-items="nidCtrl.found" on-remove="nidCtrl.removeItem(index)"></found-items>
   </div>
   <script src="jquery-3.1.0.min.js"> </script>
   <script src="angular.min.js"></script>

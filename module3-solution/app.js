@@ -3,43 +3,52 @@
 
     angular.module('NarrowItDownApp', [])
         .controller('NarrowItDownController', nidCtrlFunction)
-        .service('MenuSearchService', MenuSearchService);
+        .service('MenuSearchService', MenuSearchService)
+        .directive('foundItems',FoundItemsDirective);
     
+
+    // controller NarrowItDownController
     nidCtrlFunction.$inject = ['MenuSearchService'];
     function nidCtrlFunction(MenuSearchService) {
         var nidCtrl = this;
         console.log('CONTROLLER');
         nidCtrl.getFoundItems = function () {
-            console.log('Entree dans fonction clic');
-            var promise = MenuSearchService.getMatchedMenuItems(nidCtrl.searchWord);       
+            //console.log('Entree dans fonction clic');
+            var promise = MenuSearchService.getMatchedMenuItems(nidCtrl.searchWord);  
             promise.then(function (response) {
                 nidCtrl.found = response;
                 console.log('found: ', nidCtrl.found);
             });
 
-            // console.log('typeOf nidCtrl.found: ', typeof (nidCtrl.found));
-            // console.log('nidCtrl.found: ', nidCtrl.found);
-
-    
         }; //getFoundItems
+
+        nidCtrl.removeItem = function (index) {
+            console.log('*** Enter nidCtrl.removeItem ***');
+            console.log('nidCtrl.found.length: ', nidCtrl.found.length);
+            nidCtrl.found.splice(index, 1);
+            console.log('nidCtrl.found.length after remove: ', nidCtrl.found.length);
+
+        };// removeItem
 
     }; //nidCtrlFunction
 
 
+    // service MenuSearchService    
     MenuSearchService.$inject = ['$http'];
     function MenuSearchService($http) {
         var service = this;
 
         service.getMatchedMenuItems = function (searchTerm) {
 
+            var foundItems = [];
+            
             if (searchTerm == "") {
-                return [];
+                return foundItems;
             } else {
                 return $http({url:'https://davids-restaurant.herokuapp.com/menu_items.json'})
                     .then(function (result) {
                     
                     // process result and only keep items that match
-                    var foundItems = [];
                     var processedItems = result.data.menu_items;
                     console.log('items.length: ', processedItems.length);
                     console.log('************');
@@ -63,9 +72,32 @@
                         
                     }); // end of then
 
-            }
+            } // else
             
+        }; // getMatchedMenuItems
+    }; // MenuSearchService
+
+    // directive FoundItemsDirective    
+    function FoundItemsDirective() {
+        var ddo = {
+            restrict:'E',
+            templateUrl: 'foundItems.html',
+            scope: {
+                foundItems: '<',
+                onRemove:'&'
+            },
+            controller: FoundItemsListController,
+            controllerAs: 'listCtrl',
+            bindToController: true
         };
+
+        return ddo;
+    }; //FoundItemsDirective
+
+        //controller 
+    function FoundItemsListController() {
+        var directiveCtrl = this;
+
     };
 
 })();

@@ -1,0 +1,13 @@
+   <div>
+    <table class="table table-striped table-condensed">
+            <tr class="row" ng-repeat="item in listCtrl.foundItems" >
+                <td class="col-xs-1">{{$index +1}} </td>
+                <td class="col-xs-2">{{item.name}} </td>
+                <td class="col-xs-1"> {{item.short_name}}</td>
+                <td class="col-xs-6"> {{item.description}} </td>
+                <td class="col-xs-2">
+                    <button class="btn"   ng-click="listCtrl.onRemove({index: $index})">Don't want this one!</button> </td>
+            </tr>
+    </table>
+   </div>
+
