@@ -25,11 +25,14 @@
                 console.log('promise: ', promise);
 
                 promise.then(function (response) {
-                    if (response.length != 0) {
-                        nidCtrl.nothingFound = false;
-                    };
                     nidCtrl.found = response;
-                     
+
+                    if (response.length != 0) { // reponse non vide
+                        nidCtrl.nothingFound = false;
+                    } else { // reponse vide
+                        nidCtrl.nothingFound = true;
+                     };
+                    console.log('response: ', response); 
 
                 }); // then
             } // else
