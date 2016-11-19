@@ -1,0 +1,9 @@
+// Placez vos paramètres dans ce fichier pour remplacer les paramètres par défaut et les paramètres utilisateur.
+{
+    // Contrôle la taille de police en pixels.
+    "editor.fontSize": 17,
+    // Contrôle le nombre de caractères après lesquels l'éditeur effectue un retour automatique à la ligne suivante. Si vous affectez la valeur 0, le retour automatique à la ligne s'effectue en fonction de la largeur de la fenêtre d'affichage (retour automatique à la ligne). Si vous affectez la valeur -1, l'éditeur n'effectue jamais de retour automatique à la ligne.
+    "editor.wrappingColumn": 0,
+    // Contrôle si l'éditeur doit automatiquement mettre en forme la ligne après la saisie
+    "editor.formatOnType": true
+}
