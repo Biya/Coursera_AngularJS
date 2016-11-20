@@ -29,8 +29,8 @@
                 }]
             }
         })
-        .state('categories.items', {
-            url:'/itemsforcategory/{categoryName}',
+        .state('items', {
+            url:'/items/{categoryName}',
             templateUrl: 'src/templates/itemslist.template.html',
             controller:'ItemsListController as itemsCtrl',
             resolve: {

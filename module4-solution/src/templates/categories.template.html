@@ -1,15 +1,15 @@
-<table class="table table-striped">
+<table class="table table-striped table-hover">
     <thead >
         <tr class="row">
-            <th class="col-xs-2">Short name</th>
-            <th class="col-xs-10">Name</th>
+            <th class="col-xs-3">Short name</th>
+            <th class="col-xs-9">Name</th>
         </tr>
     </thead>
     <tbody>
         <tr class="row" ng-repeat="category in $ctrl.categoriesList"
-        ui-sref="categories.items({categoryName:category.short_name})">
-            <td class="col-xs-2"> {{category.short_name}} </td>
-            <td class="col-xs-10"> {{category.name }}</td>
+        ui-sref="items({categoryName:category.short_name})">
+            <td class="col-xs-3"> {{category.short_name}} </td>
+            <td class="col-xs-9"> {{category.name }}</td>
         </tr>
     </tbody>
 </table>
