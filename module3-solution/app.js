@@ -3,43 +3,63 @@
 
     angular.module('NarrowItDownApp', [])
         .controller('NarrowItDownController', nidCtrlFunction)
-        .service('MenuSearchService', MenuSearchService);
+        .service('MenuSearchService', MenuSearchService)
+        .directive('foundItems',FoundItemsDirective);
     
+
+    // controller NarrowItDownController
     nidCtrlFunction.$inject = ['MenuSearchService'];
     function nidCtrlFunction(MenuSearchService) {
         var nidCtrl = this;
+        nidCtrl.nothingFound = false;
+
         console.log('CONTROLLER');
         nidCtrl.getFoundItems = function () {
-            console.log('Entree dans fonction clic');
-            var promise = MenuSearchService.getMatchedMenuItems(nidCtrl.searchWord);       
-            promise.then(function (response) {
-                nidCtrl.found = response;
-                console.log('found: ', nidCtrl.found);
-            });
+            //console.log('Entree dans fonction clic');
+            console.log('Entree getFoundItems***');
+            
+            if (nidCtrl.searchWord === "" || nidCtrl.searchWord == undefined) {
+                nidCtrl.nothingFound = true;
+            } else {
+                var promise = MenuSearchService.getMatchedMenuItems(nidCtrl.searchWord); 
+                console.log('promise: ', promise);
 
-            // console.log('typeOf nidCtrl.found: ', typeof (nidCtrl.found));
-            // console.log('nidCtrl.found: ', nidCtrl.found);
+                promise.then(function (response) {
+                    nidCtrl.found = response;
 
-    
+                    if (response.length != 0) { // reponse non vide
+                        nidCtrl.nothingFound = false;
+                    } else { // reponse vide
+                        nidCtrl.nothingFound = true;
+                     };
+                    console.log('response: ', response); 
+
+                }); // then
+            } // else
+                 
+            
         }; //getFoundItems
+
+        nidCtrl.removeItem = function (index) {
+            
+            nidCtrl.found.splice(index, 1);
+
+        };// removeItem
 
     }; //nidCtrlFunction
 
 
+    // service MenuSearchService    
     MenuSearchService.$inject = ['$http'];
     function MenuSearchService($http) {
         var service = this;
 
         service.getMatchedMenuItems = function (searchTerm) {
-
-            if (searchTerm == "") {
-                return [];
-            } else {
+            
                 return $http({url:'https://davids-restaurant.herokuapp.com/menu_items.json'})
                     .then(function (result) {
-                    
-                    // process result and only keep items that match
                     var foundItems = [];
+                    // process result and only keep items that match
                     var processedItems = result.data.menu_items;
                     console.log('items.length: ', processedItems.length);
                     console.log('************');
@@ -47,25 +67,51 @@
                     var cpt = 0;
                     for (var i = 0; i < processedItems.length; i++){
                         var processedString = processedItems[i].description;
+                        // console.log("processedString: ", processedString);
+                        // console.log("processedString.indexOf(searchTerm) != -1 : ",processedString.indexOf(searchTerm) != -1 );
                         if (processedString.indexOf(searchTerm) != -1) {
                             
                             foundItems.push(processedItems[i]);
-                            console.log('foundItems[' + cpt + ']: ', foundItems[cpt].description);
+                            //console.log('foundItems[' + cpt + ']: ', foundItems[cpt].description);
                             cpt++;
                         }
 
                     }; // for
-                    console.log('foundItems.length: ', foundItems.length);
-                    console.log('foundItems: ', foundItems);
+                    // console.log('foundItems.length: ', foundItems.length);
+                    // console.log('foundItems: ', foundItems);
 
                     // return processed items
                     return foundItems;
                         
                     }); // end of then
 
-            }
             
+            
+        }; // getMatchedMenuItems
+    }; // MenuSearchService
+
+    // directive FoundItemsDirective    
+    function FoundItemsDirective() {
+        var ddo = {
+            restrict:'E',
+            templateUrl: 'foundItems.html',
+            scope: {
+                foundItems: '<',
+                onRemove:'&'
+            },
+            controller: FoundItemsListController,
+            controllerAs: 'listCtrl',
+            bindToController: true
         };
+
+        return ddo;
+    }; //FoundItemsDirective
+
+        //controller 
+    function FoundItemsListController() {
+        var listCtrl = this;
+       
+
     };
 
 })();
