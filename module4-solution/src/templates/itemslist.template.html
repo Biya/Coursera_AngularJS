@@ -1,0 +1,7 @@
+<h1>List of items</h1>
+<ol class="breadcrumb">
+  <li><a ui-sref="home">Home</a></li>
+  <li><a ui-sref="categories">Categories</a></li>
+  <li class="active">{{itemsCtrl.categoryClicked}}</li>
+</ol>
+<items items-for-category="itemsCtrl.allItems"></items>

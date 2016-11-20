@@ -2,11 +2,11 @@
     
     'use strict';
     
-    angular.module('Data')
+    angular.module('MenuApp')
         .controller('CategoriesListController', CategoriesListController);
     
-    CategoriesListController.$inject = ['MenuDataService', 'allCategories'];
-    function CategoriesListController(MenuDataService,allCategories) {
+    CategoriesListController.$inject = [ 'allCategories'];
+    function CategoriesListController(allCategories) {
         console.log(" *** Welcome to CategoriesListController");
         var categoriesCtrl = this;
         categoriesCtrl.allCategories = allCategories;

@@ -1,2 +1,14 @@
-<h3 ui-sref="categories.items({itemsId:$index})">Items </h3>
-<ui-view></ui-view>
+<table class="table table-striped">
+    <thead >
+        <tr class="row">
+            <th class="col-xs-3">Short name</th>
+            <th class="col-xs-9">Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="row" ng-repeat="item in $ctrl.itemsForCategory">
+            <td class="col-xs-3"> {{item.short_name}} </td>
+            <td class="col-xs-9"> {{item.name }}</td>
+        </tr>
+    </tbody>
+</table>

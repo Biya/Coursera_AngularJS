@@ -6,7 +6,8 @@
         </tr>
     </thead>
     <tbody>
-        <tr class="row" ng-repeat="category in $ctrl.categoriesList">
+        <tr class="row" ng-repeat="category in $ctrl.categoriesList"
+        ui-sref="categories.items({categoryName:category.short_name})">
             <td class="col-xs-2"> {{category.short_name}} </td>
             <td class="col-xs-10"> {{category.name }}</td>
         </tr>
