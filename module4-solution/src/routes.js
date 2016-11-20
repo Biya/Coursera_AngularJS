@@ -17,6 +17,17 @@
         .state('home', {
             url: '/',
             templateUrl: 'src/templates/home.template.html'
+        })
+        .state('categories', {
+            url: '/categories',
+            templateUrl: 'src/templates/categorieslist.template.html',
+            controller: 'CategoriesListController as categoriesCtrl',
+            resolve: {
+                // fetch array
+                allCategories: ['MenuDataService', function (MenuDataService) {
+                    return MenuDataService.getAllCategories();
+                }]
+            }
         });
     
     };

@@ -1,0 +1,23 @@
+<table class="table table-striped">
+    <thead >
+        <tr class="row">
+            <th class="col-xs-2">Short name</th>
+            <th class="col-xs-10">Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="row" ng-repeat="category in $ctrl.categoriesList">
+            <td class="col-xs-2"> {{category.short_name}} </td>
+            <td class="col-xs-10"> {{category.name }}</td>
+        </tr>
+    </tbody>
+</table>
+<!--<ul>
+    <li>
+        Toto
+    </li>
+    <li>
+        Titi
+    </li>
+</ul>
+<p> Toto <p>-->

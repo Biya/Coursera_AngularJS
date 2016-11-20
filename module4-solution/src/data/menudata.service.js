@@ -9,13 +9,16 @@
 
 
         service.getAllCategories = function () {
-            // return $http({ url: 'https://davids-restaurant.herokuapp.com/categories.json' })
-            //     .then(function (result) {
-                
-            //     });
+            return $http({ url: 'https://davids-restaurant.herokuapp.com/categories.json' })
+                .then(function (result) {
+                    console.log("result: ", result);
+                    console.log("result.data: ", result.data);
+
+                    return result.data;
+                });
         };
 
-        service.getItemsForCategory = function () {
+        service.getItemsForCategory = function (categoryShortName) {
             
         };
         
