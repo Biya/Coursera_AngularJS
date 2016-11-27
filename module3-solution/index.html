@@ -18,8 +18,10 @@
       </div>
    </div>
     <!-- found-items should be implemented as a component -->
-    <found-items found-items="nidCtrl.found" on-remove="nidCtrl.removeItem(index)" ng-if="nidCtrl.nothingFound == false"></found-items>
-    <h3 ng-if="nidCtrl.nothingFound" class="text-danger">Nothing found!</h3>
+    <found-items found-items="nidCtrl.found" on-remove="nidCtrl.removeItem(index)">
+      <span >{{nidCtrl.message}}</span>
+    </found-items>
+    <h3 class="text-danger">Nothing found!</h3>
 
   </div>
   <script src="jquery-3.1.0.min.js"></script>

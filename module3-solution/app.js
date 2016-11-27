@@ -22,19 +22,19 @@
                 nidCtrl.nothingFound = true;
             } else {
                 var promise = MenuSearchService.getMatchedMenuItems(nidCtrl.searchWord); 
-                console.log('promise: ', promise);
+                console.log('promise?: ', promise);
 
-                promise.then(function (response) {
-                    nidCtrl.found = response;
+                // promise.then(function (response) {
+                //     nidCtrl.found = response;
 
-                    if (response.length != 0) { // reponse non vide
-                        nidCtrl.nothingFound = false;
-                    } else { // reponse vide
-                        nidCtrl.nothingFound = true;
-                     };
-                    console.log('response: ', response); 
+                //     if (response.length != 0) { // reponse non vide
+                //         nidCtrl.nothingFound = false;
+                //     } else { // reponse vide
+                //         nidCtrl.nothingFound = true;
+                //      };
+                //     console.log('response: ', response); 
 
-                }); // then
+                // }); // then
             } // else
                  
             
@@ -56,8 +56,10 @@
 
         service.getMatchedMenuItems = function (searchTerm) {
             
-                return $http({url:'https://davids-restaurant.herokuapp.com/menu_items.json'})
+                 $http({url:'https://davids-restaurant.herokuapp.com/menu_items.json'})
                     .then(function (result) {
+
+                        console.log("result du $http: ", result);
                     var foundItems = [];
                     // process result and only keep items that match
                     var processedItems = result.data.menu_items;
@@ -67,18 +69,16 @@
                     var cpt = 0;
                     for (var i = 0; i < processedItems.length; i++){
                         var processedString = processedItems[i].description;
-                        // console.log("processedString: ", processedString);
-                        // console.log("processedString.indexOf(searchTerm) != -1 : ",processedString.indexOf(searchTerm) != -1 );
+                        
                         if (processedString.indexOf(searchTerm) != -1) {
                             
                             foundItems.push(processedItems[i]);
-                            //console.log('foundItems[' + cpt + ']: ', foundItems[cpt].description);
+                            console.log('foundItems[' + cpt + ']: ', foundItems[cpt].description);
                             cpt++;
                         }
 
                     }; // for
-                    // console.log('foundItems.length: ', foundItems.length);
-                    // console.log('foundItems: ', foundItems);
+                    
 
                     // return processed items
                     return foundItems;
@@ -97,20 +97,47 @@
             templateUrl: 'foundItems.html',
             scope: {
                 foundItems: '<',
-                onRemove:'&'
+                onRemove: '&',
+                message:'@'
             },
-            controller: FoundItemsListController,
+            controller: FoundItemsListDirectiveController,
             controllerAs: 'listCtrl',
-            bindToController: true
+            bindToController: true,
+            link: FoundItemsDirectiveLink,
+            transclude:true
         };
 
         return ddo;
     }; //FoundItemsDirective
 
+    // FoundItemsDirectiveLink link function    
+    function FoundItemsDirectiveLink(scope,element,attrs,controller) {
+        console.log("Link scope is: ", scope);
+        console.log("Controller instance is: ", controller);
+        console.log("Element is: ", element);
+
+        // scope.$watch('list.cookiesInList()', function (newValue, oldValue) {
+        //     console.log("Old value: ", oldValue);
+        //     console.log("New value: ", newValue);
+        // });        
+        
+
+    }; //FoundItemsDirectiveLink 
+    
         //controller 
-    function FoundItemsListController() {
+    function FoundItemsListDirectiveController() {
         var listCtrl = this;
        
+        listCtrl.cookiesInList = function () {
+        for (var i = 0; i < listCtrl.found.length; i++) {
+            var name = list.found[i].name;
+            if (name.toLowerCase().indexOf("cookie") !== -1) {
+                return true;
+            }
+        }
+
+        return false;
+    };
 
     };
 
