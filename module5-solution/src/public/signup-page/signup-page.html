@@ -1,83 +1,84 @@
 <div class="container">
     <h3>Sign up form</h3>
-
-    <form name='signupForm' novalidate>
-        <div class="row">
-            <input type="text" name="firstName" placeholder="Enter your first name"
-            ng-model="signupCtrl.user.firstName"
-            required
-            minlength="2"
-            class="col-md-4 col-xs-12">
-            {{ signupCtrl.user.firstName }}
-            <span
-                ng-if="(signupForm.firstName.$error.minlength || signupForm.firstName.$error.required) && signupForm.firstName.$touched"
-                class="col-md-8 col-xs-12">
-                Username must be at least 2 characters long
-            </span>
-          
-        </div>
-        <br>
-
-        <div class="row">
-          <input type="text" name="lastName" placeholder="Enter your last name"
-          ng-model="signupCtrl.user.lastName"
-          required
-          minlength="2"
-          class="col-md-4 col-xs-12">
-          {{ signupCtrl.user.lastName }}
-          <span
-            ng-if="(signupForm.lastName.$error.minlength || signupForm.lastName.$error.required) && signupForm.lastName.$touched"
-            class="col-md-8 col-xs-12">
-            Last name must be at least 2 characters long
-          </span>
-          
-        </div>
-          <br>
-        <div class="row">
-            <input type="email" name="email" placeholder="Email"
-                    ng-model="signupCtrl.user.email"
-                    required
-                    class="col-md-4 col-xs-12">
-            <span ng-if="signupForm.email.$invalid && signupForm.email.$touched"
+<div class="row">
+  <div class="col-md-6 col-xs-12">
+      <form name='signupForm' novalidate>
+          <div class="row">
+              <input type="text" name="firstName" placeholder="Enter your first name"
+              ng-model="signupCtrl.user.firstName"
+              required
+              minlength="2"
+              class="form-control col-md-4 col-xs-12">
+              <span
+                  ng-if="(signupForm.firstName.$error.minlength || signupForm.firstName.$error.required) && signupForm.firstName.$touched"
                   class="col-md-8 col-xs-12">
-                Must be a valid email address: user@domain format
-            </span>
-        </div>
-          <br>
-        <div class="row">
-        <input type="text" name="phone" placeholder="Phone ###-###-####"
-               ng-model="signupCtrl.user.phone"
-               pattern="(\d{3})-(\d{3})-(\d{4})"
-               required
-               class="col-md-4 col-xs-12">
-          <span ng-if="signupForm.phone.$invalid && signupForm.phone.$touched"
-               class="col-md-4 col-xs-12">
-            Phone must be in the format ###-###-####.
-          </span>
-        </div> 
-          <br>
-
-        <div class="row">
-            <input type="text" name="favoriteDish" placeholder="Enter your favorite dish"
-                    ng-model="signupCtrl.user.favoriteDish"
-                    class="col-md-4 col-xs-12">
-            <span ng-if="signupCtrl.itemNotValid"> {{ signupCtrl.errorMsgItem }}</span>
-
-        </div>
+                  Username must be at least 2 characters long
+              </span>
+            
+          </div>
           <br>
 
           <div class="row">
-            <button
-                type="button"
-                ng-disabled="signupForm.$invalid"
-                ng-click="signupCtrl.submit()"
-                class="btn btn-primary col-md-4 col-xs-12">Submit</button>
+            <input type="text" name="lastName" placeholder="Enter your last name"
+            ng-model="signupCtrl.user.lastName"
+            required
+            minlength="2"
+            class="form-control col-md-4 col-xs-12">
+            <span
+              ng-if="(signupForm.lastName.$error.minlength || signupForm.lastName.$error.required) && signupForm.lastName.$touched"
+              class="col-md-8 col-xs-12">
+              Last name must be at least 2 characters long
+            </span>
+            
           </div>
-          <div ng-if="signupCtrl.infoSaved">{{signupCtrl.validationMsg}}</div>
-          <!--<div style="margin-top: 10px;">
-            Form valid? {{ signupForm.$valid }}
-          </div>-->
-      </form>
+            <br>
+          <div class="row">
+              <input type="email" name="email" placeholder="Email"
+                      ng-model="signupCtrl.user.email"
+                      required
+                      class=" form-control col-md-4 col-xs-12">
+              <span ng-if="signupForm.email.$invalid && signupForm.email.$touched"
+                    class="col-md-8 col-xs-12">
+                  Must be a valid email address: user@domain format
+              </span>
+          </div>
+            <br>
+          <div class="row">
+            <input type="text" name="phone" placeholder="Phone ###-###-####"
+                  ng-model="signupCtrl.user.phone"
+                  pattern="(\d{3})-(\d{3})-(\d{4})"
+                  required
+                  class="form-control col-md-4 col-xs-12">
+              <span ng-if="signupForm.phone.$invalid && signupForm.phone.$touched"
+                  class="col-md-4 col-xs-12">
+                Phone must be in the format ###-###-####.
+              </span>
+          </div> 
+            <br>
+
+          <div class="row">
+              <input type="text" name="favoriteDish" placeholder="Enter your favorite dish"
+                      ng-model="signupCtrl.user.favoriteDish"
+                      class="form-control col-md-4 col-xs-12">
+              <span ng-if="signupCtrl.itemNotValid"> {{ signupCtrl.errorMsgItem }}</span>
+
+          </div>
+            <br>
+
+            <div class="row">
+              <button
+                  type="button"
+                  ng-disabled="signupForm.$invalid"
+                  ng-click="signupCtrl.submit()"
+                  class="btn btn-primary col-xs-12">Submit</button>
+            </div>
+            <div ng-if="signupCtrl.infoSaved">{{signupCtrl.validationMsg}}</div>
+            <!--<div style="margin-top: 10px;">
+              Form valid? {{ signupForm.$valid }}
+            </div>-->
+        </form>
+  </div> <!--col-md-6 col-xs-12 -->
+</div> <!-- .row -->
 
 
 </div>
