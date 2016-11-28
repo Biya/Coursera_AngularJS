@@ -45,13 +45,20 @@ function routeConfig ($stateProvider) {
       url: '/signup',
       templateUrl: 'src/public/signup-page/signup-page.html',
       controller: 'SignupController',
-      controllerAs: 'signupCtrl',
-      resolve: {
-        menuItems: ['MenuService', function (MenuService) {
-          return MenuService.getMenuItems();
-        }]
-      }
+      controllerAs: 'signupCtrl'
       
+    })
+    .state('public.myinfo', {
+      url: '/myinfo',
+      templateUrl: 'src/public/myinfo/myinfo.html',
+      controller: 'myInfoController',
+      controllerAs: 'myInfoCtrl',
+      resolve: {
+        userInfo: ['UserPrefService', function (UserPrefService) {
+          return UserPrefService.getUserPref()
+        }]
+
+      }
     });
 }
 })();

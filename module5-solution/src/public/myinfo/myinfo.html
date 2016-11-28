@@ -1,0 +1,46 @@
+<p ng-if="!myInfoCtrl.isRegistered">Not Signed Up Yet. 
+    <a ui-sref="public.signuppage">Sign up Now!</a></p>
+
+<div class="container" ng-if="myInfoCtrl.isRegistered">
+    <h4> Registered user info :</h4>
+    <div class="row">
+    <label class="col-md-2 col-xs-12">First name: </label>
+    <p class="col-md-2 col-xs-12">{{myInfoCtrl.userInfo.firstName}}</p>
+    </div>
+    <div class="row">
+        <label class="col-md-2 col-xs-12">Last name: </label>
+        <span class="col-md-2 col-xs-12">{{myInfoCtrl.userInfo.lastName}}</span>
+    </div>
+    <div class="row">
+        <label class="col-md-2 col-xs-12">Email: </label>
+        <span class="col-md-2 col-xs-12">{{myInfoCtrl.userInfo.email}}</span>
+    </div>
+    <div class="row">
+        <label class="col-md-2 col-xs-12">Phone: </label>
+        <span class="col-md-2 col-xs-12">{{myInfoCtrl.userInfo.phone}}</span>
+    </div>
+
+    <!--To display the favorite dish
+        Code from menu-item template-->
+    <div class="row">
+
+        <div class="menu-item-tile col-xs-12">
+            <div class="row">
+                <div class="menu-item-photo col-sm-5 col-xs-12">
+                    <div>{{myInfoCtrl.itemToDisplay.short_name}}</div>
+                    <img class="img-responsive" width="250" height="150" 
+                        ng-src="{{myInfoCtrl.basePath}}/images/{{myInfoCtrl.itemToDisplay.short_name}}.jpg" 
+                        alt="{{myInfoCtrl.itemToDisplay.name}}">
+                </div>
+                
+
+                <div class="menu-item-description col-sm-7 col-xs-12">
+                    <h3 class="menu-item-title">{{myInfoCtrl.itemToDisplay.name}}</h3>
+                    <p class="menu-item-details">{{myInfoCtrl.itemToDisplay.description}}</p>
+                </div>
+                
+            </div> <!--row -->
+        <hr class="visible-xs">
+        </div>
+    </div> <!--row -->
+</div>

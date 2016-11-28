@@ -16,11 +16,14 @@ function SignupController(ApiPath,UserPrefService,MenuService) {
         var promise = MenuService.getOneMenuItem(signupCtrl.user.favoriteDish);
         promise.then(function (response) {
             signupCtrl.itemNotValid = false;
+
             UserPrefService.saveUserPref(signupCtrl.user);
+            console.log("UserPrefService.isRegistered: ", UserPrefService.isRegistered);
             signupCtrl.infoSaved = true;
             console.log("user: ",UserPrefService.getUserPref());
         })
             .catch(function (error) {
+                UserPrefService.isRegistered = false;
                 signupCtrl.itemNotValid = true;
                 signupCtrl.infoSaved = false;
                 //console.log(signupCtrl.itemNotValid);
